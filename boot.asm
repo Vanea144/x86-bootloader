@@ -4,7 +4,12 @@ org 0x7c00		;every address should be relative to this
 start:
 	mov ax, 0x0013	;Sets ah=00 and al=13 (VGA Mode 13h)
 	int 0x10	;BIOS video interrupt
-	
+	mov ax, 0xA000	;Initial address for segmentation
+	mov es, ax	;Needs to be in ES
+	mov di, 32160 	;The value for center
+	mov al, 14	;Yellow
+	mov [es:di], al 		
+
 	hang:
 		jmp hang 	;infinite loop for CPU not to crash
 
